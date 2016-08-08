@@ -1,0 +1,15 @@
+﻿@model TouristViewModel
+
+@{
+  ViewBag.Title = "Details";
+}
+
+<h4>Tourist Details</h4>
+<hr />
+
+@Html.Partial("_TouristDetails", Model)
+
+<p>
+  @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+  @Html.ActionLink("Back to List", "Index")
+</p>

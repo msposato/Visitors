@@ -1,0 +1,169 @@
+﻿@model ClassVisitorViewModel
+
+@{
+  ViewBag.Title = "Class Visit Registration";
+}
+<div>
+  <strong>@ViewBag.Message</strong>
+</div>
+
+<h3>Register for a class visit</h3>
+
+@using (Html.BeginForm())
+{
+  @Html.AntiForgeryToken()
+  @Html.ValidationSummary(false)
+
+  <fieldset>
+    <legend>ClassVisitorViewModel</legend>
+
+    <div class="section-label">Required</div>
+    <div class="section-wrapper">
+      <div class="editor-label">
+        @Html.LabelFor(model => model.FirstName)
+      </div>
+      <div class="editor-field">
+        @Html.EditorFor(model => model.FirstName)
+        @Html.ValidationMessageFor(model => model.FirstName, "*")
+      </div>
+
+      <div class="editor-label">
+        @Html.LabelFor(model => model.LastName)
+      </div>
+      <div class="editor-field">
+        @Html.EditorFor(model => model.LastName)
+        @Html.ValidationMessageFor(model => model.LastName, "*")
+      </div>
+
+      <div class="editor-label">
+        @Html.LabelFor(model => model.Email)
+      </div>
+      <div class="editor-field">
+        @Html.EditorFor(model => model.Email)
+        @Html.ValidationMessageFor(model => model.Email, "*")
+      </div>
+
+      <div class="editor-label">
+        @Html.LabelFor(model => model.Phone)
+      </div>
+      <div class="editor-field">
+        @Html.EditorFor(model => model.Phone)
+        @Html.ValidationMessageFor(model => model.Phone, "*")
+      </div>
+
+      <div class="editor-label">
+        <span class="editor-label">What year are you in school?</span>
+        <span class="editor-field">
+          @Html.DropDownListFor(x => x.YearInSchool, Model.SchoolYears, "Select School Year")
+          @Html.ValidationMessageFor(model => model.YearInSchool, "*")
+        </span>
+      </div>
+
+      <div class="editor-label">
+        <span class="editor-label">When would you like to visit?</span>
+        <span class="editor-field">
+          @Html.DropDownListFor(x => x.PreferedTimeSlotId, Model.AvailableTimeSlots, "Select Visit Date and Time")
+          @Html.ValidationMessageFor(model => model.PreferedTimeSlotId, "*")
+        </span>
+      </div>
+    </div>
+
+    <div class="section-label">Optional</div>
+    <div class="section-wrapper">
+
+      <div class="editor-label">
+        <span class="editor-label">Alternate visit date and time:</span>
+        <span class="editor-field">
+          @Html.DropDownListFor(x => x.AlternateTimeSlotId, Model.AvailableTimeSlots, "Select Visit Date and Time")
+          @Html.ValidationMessageFor(model => model.AlternateTimeSlotId, "*")
+        </span>
+      </div>
+
+      <div class="editor-label">
+        What subjects are of interest to you? 
+      </div>
+      <div class="editor-field">
+        <div style="float: left;">
+          @for (int i = 0; i < Model.AcademicSubjects.Count() / 2; i++)
+          {
+            <label class="checkbox-label">
+              @Html.CheckBox(String.Format("AcademicSubjects[{0}].IsChecked", i), Model.AcademicSubjects.ElementAt(i).IsChecked)
+              @Html.DisplayFor(modelItem => Model.AcademicSubjects.ElementAt(i).Label)
+              @Html.Hidden(String.Format("AcademicSubjects[{0}].Id", i), Model.AcademicSubjects.ElementAt(i).Id)
+              @Html.Hidden(String.Format("AcademicSubjects[{0}].Label", i), Model.AcademicSubjects.ElementAt(i).Label)
+            </label>           
+          }
+        </div>
+        <div style="display: inline-block; margin-left: 2em;">
+          @for (int i = Model.AcademicSubjects.Count() / 2; i < Model.AcademicSubjects.Count(); i++)
+          {
+            <label class="checkbox-label">
+              @Html.CheckBox(String.Format("AcademicSubjects[{0}].IsChecked", i), Model.AcademicSubjects.ElementAt(i).IsChecked)
+              @Html.DisplayFor(modelItem => Model.AcademicSubjects.ElementAt(i).Label)
+              @Html.Hidden(String.Format("AcademicSubjects[{0}].Id", i), Model.AcademicSubjects.ElementAt(i).Id)
+              @Html.Hidden(String.Format("AcademicSubjects[{0}].Label", i), Model.AcademicSubjects.ElementAt(i).Label)
+            </label>           
+          }
+        </div>
+      </div>
+
+      <div class="float-left">
+        <div class="editor-label">
+          @Html.LabelFor(model => model.Address1)
+        </div>
+        <div class="editor-field">
+          @Html.EditorFor(model => model.Address1)
+          @Html.ValidationMessageFor(model => model.Address1)
+        </div>
+
+        <div class="editor-label">
+          @Html.LabelFor(model => model.Address2)
+        </div>
+        <div class="editor-field">
+          @Html.EditorFor(model => model.Address2)
+          @Html.ValidationMessageFor(model => model.Address2)
+        </div>
+
+        <div class="editor-label">
+          @Html.LabelFor(model => model.City)
+        </div>
+        <div class="editor-field">
+          @Html.EditorFor(model => model.City)
+          @Html.ValidationMessageFor(model => model.City)
+        </div>
+      </div>
+
+      <div class="editor-label">
+        @Html.LabelFor(model => model.State)
+      </div>
+
+      <div class="editor-field">
+        @Html.DropDownListFor(model => model.State, Model.States, "Select a State")
+      </div>
+
+      <div class="editor-label">
+        @Html.LabelFor(model => model.PostalCode)
+      </div>
+      <div class="editor-field">
+        @Html.EditorFor(model => model.PostalCode)
+        @Html.ValidationMessageFor(model => model.PostalCode)
+      </div>
+
+      <div class="editor-label">
+        @Html.LabelFor(model => model.Country)
+      </div>
+      <div class="editor-field">
+        @Html.EditorFor(model => model.Country)
+        @Html.ValidationMessageFor(model => model.Country)
+      </div>
+    </div>
+
+    <p>
+      <input type="submit" value="Submit Visit Request" />
+    </p>
+  </fieldset>
+}
+
+@section Scripts {
+  @Scripts.Render("~/bundles/jqueryval")
+}

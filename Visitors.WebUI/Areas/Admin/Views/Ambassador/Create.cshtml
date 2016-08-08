@@ -1,0 +1,75 @@
+﻿@model AmbassadorViewModel
+
+@{
+  ViewBag.Title = "Create";
+}
+
+<h3>Add Ambassador</h3>
+
+@using (Html.BeginForm())
+{
+  @Html.AntiForgeryToken()
+  @Html.ValidationSummary(true)
+
+  <fieldset>
+    <legend>AmbassadorViewModel</legend>
+
+    <div class="editor-label">
+      @Html.LabelFor(model => model.FirstName)
+    </div>
+    <div class="editor-field">
+      @Html.EditorFor(model => model.FirstName)
+      @Html.ValidationMessageFor(model => model.FirstName)
+    </div>
+
+    <div class="editor-label">
+      @Html.LabelFor(model => model.LastName)
+    </div>
+    <div class="editor-field">
+      @Html.EditorFor(model => model.LastName)
+      @Html.ValidationMessageFor(model => model.LastName)
+    </div>
+
+    <div class="editor-label">
+      @Html.LabelFor(model => model.UserName)
+    </div>
+    <div class="editor-field">
+      @Html.EditorFor(model => model.UserName)
+      @Html.ValidationMessageFor(model => model.UserName)
+    </div>
+
+    <div class="editor-label">
+      @Html.LabelFor(model => model.Email)
+    </div>
+    <div class="editor-field">
+      @Html.EditorFor(model => model.Email)
+      @Html.ValidationMessageFor(model => model.Email)
+    </div>
+
+    <div class="editor-label">
+      @Html.LabelFor(model => model.PhoneNumber)
+    </div>
+    <div class="editor-field">
+      @Html.EditorFor(model => model.PhoneNumber)
+      @Html.ValidationMessageFor(model => model.PhoneNumber)
+    </div>
+
+    <div class="editor-label">
+      <span class="editor-label-inline">
+        @Html.LabelFor(model => model.Active)
+      </span>
+      <span class="editor-field-inline">
+        @Html.EditorFor(model => model.Active)
+        @Html.ValidationMessageFor(model => model.Active)
+      </span>
+    </div>
+
+    <p>
+      <input type="submit" value="Create" />
+    </p>
+  </fieldset>
+}
+
+<div>
+  @Html.ActionLink("Back to List", "Index")
+</div>

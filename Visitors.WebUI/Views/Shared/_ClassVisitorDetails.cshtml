@@ -1,0 +1,80 @@
+﻿@model ClassVisitorViewModel
+
+<h3>@Html.DisplayFor(model => model.FullName)</h3>
+
+<fieldset>
+  <legend>ClassVisitorViewModel</legend>
+
+  <div class="display-field">
+    <a href="mailto:@Model.Email">@Model.Email</a>
+  </div>
+
+  <div class="display-field">
+    @Html.DisplayFor(model => model.Phone)
+  </div>
+
+  <div class="display-field">
+    @Html.DisplayFor(model => model.Address1)
+  </div>
+
+  <div class="display-field">
+    @Html.DisplayFor(model => model.Address2)
+  </div>
+
+  <div class="display-field">
+    @Html.DisplayFor(model => model.City) @Html.DisplayFor(model => model.State) @Html.DisplayFor(model => model.PostalCode)
+  </div>
+
+  <div class="display-field">
+    @Html.DisplayFor(model => model.Country)
+  </div>
+
+  <div>
+    <span class="display-label">Year In School: </span>
+    <span class="display-field">
+      @Html.DisplayFor(model => model.YearInSchool)
+    </span>
+  </div>
+
+  <div>
+    <span class="display-label">Preferred Visit Date: </span>
+    <span class="display-field">
+      @Html.DisplayFor(model => model.PreferedTimeSlot.Description)
+    </span>
+  </div>
+
+  <div>
+    <span class="display-label">Alternate Visit Date:</span>
+    <span class="display-field">
+      @if (Model.AlternateTimeSlot != null)
+      {
+        @Html.DisplayFor(model => model.AlternateTimeSlot.Description)
+      }
+      else
+      {
+        @Html.Display("None")
+      }
+    </span>
+  </div>
+
+  <div>
+    <span class="display-label">Assigned Ambassador:</span>
+    <span class="display-field">
+      @if (Model.Ambassador != null)
+      {
+        @Html.DisplayFor(model => model.Ambassador.FullName)
+      }
+      else
+      {
+        @Html.Display("None");
+      }
+    </span>
+  </div>
+
+  <div class="display-label">Areas of Interest:</div>
+  @foreach (var item in Model.AcademicSubjects)
+  {
+    <div class="display-field">@item.Label</div>
+  }
+
+</fieldset>

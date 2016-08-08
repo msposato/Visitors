@@ -1,0 +1,20 @@
+﻿@model ClassVisitorViewModel
+
+@{
+  ViewBag.Title = "McIntire Class Visit Details";
+}
+
+<h5>Confirmation of Class Visit</h5>
+
+<div>
+  @ViewBag.Message  
+</div>
+
+@Html.Partial("_ClassVisitorDetails", Model)
+
+<p>
+  If you need to cancel this cancel this tour, click the link below.
+</p>
+<p>
+  @Html.ActionLink("Cancel Class Visit", "Cancel", new { id = Model.Id })
+</p>

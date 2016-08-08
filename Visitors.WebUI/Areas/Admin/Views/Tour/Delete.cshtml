@@ -1,0 +1,49 @@
+﻿@model TourViewModel
+
+@{
+  ViewBag.Title = "Delete";
+}
+
+<h3>Are you sure you want to delete this tour?</h3>
+<fieldset>
+  <legend>TourViewModel</legend>
+
+  <div class="display-field">
+    @Html.DisplayFor(model => model.StartTime)
+  </div>
+
+  <div class="display-label">
+    @Html.DisplayNameFor(model => model.Comments)
+  </div>
+  <div class="display-field">
+    @Html.DisplayFor(model => model.Comments)
+  </div>
+
+  <div class="display-label">
+    @Html.DisplayNameFor(model => model.PrimaryAmbassador)
+  </div>
+  <div class="display-field">
+    @if (Model.PrimaryAmbassador != null)
+    {
+      @Model.PrimaryAmbassador.FullName
+    }
+  </div>
+
+  <div class="display-label">
+    @Html.DisplayNameFor(model => model.AssistantAmbassador)
+  </div>
+  <div class="display-field">
+    @if (Model.AssistantAmbassador != null)
+    {
+      @Model.AssistantAmbassador.FullName
+    }
+  </div>
+</fieldset>
+@using (Html.BeginForm())
+{
+  @Html.AntiForgeryToken()
+  <p>
+    <input type="submit" value="Delete" />
+    | @Html.ActionLink("Back to List", "Index")
+  </p>
+}

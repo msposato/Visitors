@@ -1,0 +1,106 @@
+﻿@model IEnumerable<AmbassadorViewModel>
+
+@{
+  ViewBag.Title = "Index";
+}
+
+<h3>McIntire Ambassadors</h3>
+
+<div>
+  @ViewBag.Message
+</div>
+
+<p>
+  @Html.ActionLink("Add Ambassadors From Domain Group", "DomainMembers")
+</p>
+<table id="AmbassadorsTable" class="sortable-table full-width highlight-rows">
+  <thead>
+    <tr>
+      <th>
+        @Html.DisplayNameFor(model => model.FirstName)
+      </th>
+      <th>
+        @Html.DisplayNameFor(model => model.LastName)
+      </th>
+      <th>
+        @Html.DisplayNameFor(model => model.UserName)
+      </th>
+      <th>
+        @Html.DisplayNameFor(model => model.Email)
+      </th>
+      <th>
+        @Html.DisplayNameFor(model => model.PhoneNumber)
+      </th>
+      <th>
+        @Html.DisplayNameFor(model => model.Active)
+      </th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  @foreach (var item in Model)
+  {
+    <tr>
+      <td>
+        @Html.DisplayFor(modelItem => item.FirstName)
+      </td>
+      <td>
+        @Html.DisplayFor(modelItem => item.LastName)
+      </td>
+      <td>
+        @Html.DisplayFor(modelItem => item.UserName)
+      </td>
+      <td>
+        <a href="mailto:@item.Email">@item.Email</a>
+      </td>
+      <td>
+        @Html.DisplayFor(modelItem => item.PhoneNumber)
+      </td>
+      <td>
+        @Html.DisplayFor(modelItem => item.Active)
+      </td>
+      <td>
+        @Ajax.ActionLink("Class Visits", "Visitors", new { id = item.Id },
+                         new AjaxOptions
+                         {
+                           HttpMethod = "GET",
+                           OnComplete = "ShowDetailsDialog",
+                           InsertionMode = InsertionMode.Replace,
+                           UpdateTargetId = "DetailsDialogContent"
+                         }) (@item.Visitors.Count()) |
+        @Ajax.ActionLink("McIntire Tours", "Tours", new { id = item.Id },
+                         new AjaxOptions
+                         {
+                           HttpMethod = "GET",
+                           OnComplete = "ShowDetailsDialog",
+                           InsertionMode = InsertionMode.Replace,
+                           UpdateTargetId = "DetailsDialogContent"
+                         }) (@item.AllTours.Count()) 
+      </td>
+      <td>
+        @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+        @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+      </td>
+    </tr>
+  }
+
+</table>
+
+<div id="DetailsDialogContent" class="dialog-content"></div>
+
+@section scripts
+{
+  <script>
+    $(function () {
+      $("#AmbassadorsTable").tablesorter({
+        sortList: [[1, 0]],
+        headers: { 6: { sorter: false }, 7: { sorter: false } }
+      });
+    });
+
+    function ShowDetailsDialog() {
+      $("#DetailsDialogContent").dialog({ width: "auto" });
+    }
+  </script>
+}

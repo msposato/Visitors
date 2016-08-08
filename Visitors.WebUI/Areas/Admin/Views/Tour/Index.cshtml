@@ -1,0 +1,47 @@
+﻿@model ListToursViewModel
+
+@{
+  ViewBag.Title = "Tours";
+}
+
+<h3>McIntire Tours</h3>
+Select Academic Year:
+@using (Html.BeginForm("ChangeYear", "Tour", FormMethod.Post, new { style = "display:inline;" }))
+{
+  @Html.DropDownListFor(model => Model.Year, Model.Years, new { onchange = "this.form.submit();" })    
+}
+<span class="display-field">(@Model.BeginDate.ToShortDateString() - @Model.EndDate.ToShortDateString())</span>
+
+
+<p>
+  @Html.ActionLink("Create New", "Create", "Tour")
+</p>
+
+@if (Model.Tours.Any())
+{
+  @Html.Partial("_Tours", Model.Tours)
+}
+else
+{
+  <p>No Tours for selected academic year.</p>
+}
+
+
+<div id="DetailsContentDialog" class="dialog-content"></div>
+
+@section scripts
+{
+  <script>
+    $(function () {
+      $("#ToursTable").tablesorter(
+        {
+          sortList: [[0, 0]],
+          headers: { 4: { sorter: false } }
+        });
+    });
+
+    function ShowDetailsDialog() {
+      $("#DetailsContentDialog").dialog({ width: "auto" });
+    }
+  </script>
+}

@@ -1,0 +1,88 @@
+﻿@model ClassVisitorViewModel
+
+@{
+  ViewBag.Title = "Edit";
+}
+
+@using (Html.BeginForm())
+{
+  @Html.AntiForgeryToken()
+  @Html.ValidationSummary(false)
+
+  <fieldset>
+    <legend>ClassVisitorViewModel</legend>
+
+    @Html.HiddenFor(model => model.Id)
+
+    <h3>@Html.DisplayFor(model => model.FullName)</h3>
+
+    <div class="display-field">
+      <a href="mailto:@Model.Email)">@Html.DisplayFor(model => model.Email)</a>
+    </div>
+
+    <div class="display-field">
+      @Html.DisplayFor(model => model.Phone)
+    </div>
+
+    <div class="display-field">
+      @Html.DisplayFor(model => model.Address1)
+    </div>
+
+    <div class="display-field">
+      @Html.DisplayFor(model => model.Address2)
+    </div>
+
+    <div class="display-field">
+      @Html.DisplayFor(model => model.City) @Html.DisplayFor(model => model.State) @Html.DisplayFor(model => model.PostalCode)
+    </div>
+
+    <div class="display-field">
+      @Html.DisplayFor(model => model.Country)
+    </div>
+
+    <div class="editor-label">
+      <span class="display-label">Year In School: </span>
+      <span class="display-field">
+        @Html.DisplayFor(model => model.YearInSchool)
+      </span>
+    </div>
+
+    <div class="display-label">Areas of Interest:</div>
+    @foreach (var item in Model.AcademicSubjects)
+    {
+      <div class="display-field">@item.Label</div>
+    }
+
+    <div class="editor-label">
+      <span class="display-label">Preferred Visit Date: </span>
+      <span class="display-field">
+        @Html.DropDownListFor(x => x.PreferedTimeSlotId, Model.AvailableTimeSlots, "Select Visit Date and Time")
+        @Html.ValidationMessageFor(model => model.PreferedTimeSlotId, "*")
+      </span>
+    </div>
+
+    <div class="editor-label">
+      <span class="display-label">Alternate Visit Date:</span>
+      <span class="display-field">
+        @Html.DropDownListFor(x => x.AlternateTimeSlotId, Model.AlternateTimeSlots, "Select Visit Date and Time")
+        @Html.ValidationMessageFor(model => model.AlternateTimeSlotId, "*")
+      </span>
+    </div>
+
+    <div class="editor-label">
+      <span class="editor-label">Assigned Ambassador:</span>
+      <span class="editor-field">
+        @Html.DropDownListFor(x => x.AmbassadorId, Model.Ambassadors, "Select Ambassador")
+        @Html.ValidationMessageFor(model => model.AmbassadorId, "*")
+      </span>
+    </div>
+
+    <p>
+      <input type="submit" value="Save" />
+    </p>
+  </fieldset>
+}
+
+<div>
+  @Html.ActionLink("Back to List", "Index")
+</div>

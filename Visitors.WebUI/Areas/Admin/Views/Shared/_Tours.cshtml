@@ -1,0 +1,59 @@
+﻿@model IEnumerable<TourViewModel>
+
+<table id="ToursTable" class="sortable-table full-width highlight-rows">
+
+  <thead>
+    <tr>
+      <th>
+        @Html.DisplayNameFor(model => model.StartTime)
+      </th>
+      <th>
+        @Html.DisplayNameFor(model => model.PrimaryAmbassador)
+      </th>
+      <th>
+        @Html.DisplayNameFor(model => model.AssistantAmbassador)
+      </th>
+      <th>
+        @Html.DisplayNameFor(model => model.Comments)
+      </th>
+      <th></th>
+    </tr>
+  </thead>
+
+  @foreach (var item in Model)
+  {
+    <tr>
+      <td class="nowrap">
+        @Html.DisplayFor(modelItem => item.StartTime)
+      </td>
+      <td class="nowrap">
+        @if (item.PrimaryAmbassador != null)
+        {
+          @item.PrimaryAmbassador.FullName
+        }
+      </td>
+      <td class="nowrap">
+        @if (item.AssistantAmbassador != null)
+        {
+          @item.AssistantAmbassador.FullName
+        }
+      </td>
+      <td>
+        @Html.DisplayFor(modelItem => item.Comments)
+      </td>
+      <td class="nowrap">
+        @Html.ActionLink("Edit", "Edit", "Tour", new { id = item.Id }, null) |
+        @Ajax.ActionLink("Tourists", "Tourists", "Tour", new { id = item.Id }, new AjaxOptions
+              {
+                UpdateTargetId = "DetailsContentDialog",
+                HttpMethod = "GET",
+                InsertionMode = InsertionMode.Replace,
+                OnComplete = "ShowDetailsDialog();"
+
+              }) (@item.Tourists.Count()) |
+              @Html.ActionLink("Delete", "Delete", "Tour", new { id = item.Id }, null)
+            </td>
+    </tr>
+  }
+
+</table>

@@ -1,0 +1,275 @@
+﻿/* ================================================================= */
+/* ----------------- Override Site.css Settings ---------------------*/
+/* ================================================================= */
+#login .username {
+  font-size: 1.3em;
+}
+
+textarea {
+  font-family: inherit;
+  width: auto;
+  font-size: 1.0em;
+}
+/* ================================================================= */
+
+
+/* ================================================================= */
+/* --------------------- Admin Actions Menu -------------------------*/
+/* ================================================================= */
+.admin-actions-dropdown {
+  margin: 10px -22px 10px 0;
+  width: 143px;
+  position: relative;
+  height: 17px;
+  text-align: left;
+}
+
+.admin-actions-submenu {
+  background: #fff;
+  position: absolute;
+  top: -12px;
+  left: -10px;
+  z-index: 100;
+  width: 180px;
+  display: none;
+  margin-left: 5px;
+  padding: 40px 0 5px;
+  border-radius: 6px;
+  box-shadow: 0 2px 8px #000000;
+  -webkit-box-shadow: 0 2px 8px #000000;
+  -webkit-box-shadow: 0 2px 8px rgba(0, 0, 0, 0.45);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.45);
+}
+
+.admin-actions-dropdown li a {
+  color: #555555;
+  display: block;
+  padding: 2px 15px;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+  .admin-actions-dropdown li a:hover {
+    background: #EFEEEF;
+    text-decoration: none;
+  }
+
+a.admin-actions {
+  line-height: 16px;
+  position: absolute;
+  z-index: 110;
+  display: block;
+  padding: 11px 0 0 15px;
+  height: 28px;
+  width: 170px;
+  margin: -11px 0 0 -10px;
+  text-decoration: none;
+  background: url(../Images/admin-actions-arrow.png) 160px 17px no-repeat;
+  cursor: pointer;
+}
+
+.admin-actions-submenu-root {
+  list-style: none;
+  margin: 0;
+  padding: 11px 0 0 0;
+  border-top: 1px solid #dedede;
+}
+/* ================================================================= */
+
+
+/* ================================================================= */
+/* ----------------------  General Table Settings -------------------*/
+/* ================================================================= */
+table.full-width {
+  width: 100%;
+}
+
+table.auto-width {
+  width: auto;
+}
+
+td.nowrap {
+  white-space: nowrap;
+}
+
+th {
+  font-size: 1.0em;
+}
+/* ================================================================= */
+
+
+/* ================================================================= */
+/* ---------------------  Sortable Table Settings -------------------*/
+/* ================================================================= */
+table.sortable-table thead tr th, table.sortable-table tfoot tr th {
+  background-color: #e6EEEE;
+  border: 1px solid #FFF;
+  padding: 4px;
+}
+
+table.sortable-table thead tr .header {
+  background-image: url(../Images/bg.gif);
+  background-repeat: no-repeat;
+  background-position: center right;
+  cursor: pointer;
+}
+
+table.sortable-table tbody tr.odd td {
+  background-color: #F0F0F6;
+}
+
+table.sortable-table thead tr .headerSortUp {
+  background-image: url(../Images/asc.gif);
+}
+
+table.sortable-table thead tr .headerSortDown {
+  background-image: url(../Images/desc.gif);
+}
+
+table.sortable-table thead tr .headerSortDown, table.sortable-table thead tr .headerSortUp {
+  background-color: #8dbdd8;
+}
+
+table.highlight-rows tbody tr:hover {
+  background: gainsboro;
+}
+/* ================================================================= */
+
+
+/* ================================================================= */
+/* ------------------- Data Fields Display --------------------------*/
+/* ================================================================= */
+.field-wrapper {
+  margin-bottom: 10px;
+}
+
+.display-label, .editor-label {
+  padding-top: 10px;
+  font-weight: 600;
+}
+
+.editor-label-inline {
+  float: left;
+  margin-right: 0.5em;
+  padding-top: 18px;
+  font-weight: 600;
+}
+
+.editor-field-inline {
+  display: inline-block;
+  padding-top: 18px;
+}
+
+
+input.checkbox {
+  border: none;
+}
+
+label.checkbox-label {
+  display: block;
+  clear: both;
+  font-size: 1.0em;
+  font-weight: 500;
+}
+
+label.display-inline {
+  display: inline;
+}
+
+.margin-above {
+  margin-top: 10px;
+}
+
+.section-label {
+  margin-bottom: 0;
+  margin-top: 1.5em;
+  font-weight: 600;
+}
+
+div.section-wrapper {
+  border: lightgray solid 1px;
+  padding: 5px;
+  margin-top: 0;
+  overflow-y: auto;
+}
+
+input[type="file"] {
+  width: 500px;
+}
+
+.preserve-text-formatting {
+  white-space: pre-line;
+  font-style: italic;
+}
+
+.display-field, .editor-field {
+  font-weight: normal;
+}
+
+input#NumberInParty {
+  width: 50px;
+}
+/* ================================================================= */
+
+
+/* ================================================================= */
+/* ------------------ Message and Dialog Display --------------------*/
+/* ================================================================= */
+div.dialog-content {
+  font-size: 0.85em;
+}
+
+div.user-message {
+  color: red;
+}
+/* ================================================================= */
+
+
+/* ================================================================= */
+/* -------------------------- Print Settings ------------------------*/
+/* ================================================================= */
+@media print {
+
+  .no-print {
+    display: none;
+  }
+
+  body {
+    border-top: none;
+  }
+}
+/* ================================================================= */
+
+/* ================================================================= */
+/* -------------------------- Sub Menu Settings ------------------------*/
+/* ================================================================= */
+ul#submenu li a {
+  text-decoration: none;
+}
+
+ul#submenu {
+  padding-left: 0.5em;
+}
+
+  ul#submenu li {
+    display: inline;
+    list-style: none;
+  }
+/* ================================================================= */
+
+
+/* ================================================================= */
+/* ------------------------- Test Site Warning-----------------------*/
+/* ================================================================= */
+div#TestSiteWarning {
+  text-align: center;
+  background-color: rgb(236, 159, 174);
+  margin: 0 auto;
+  top: -12px;
+  position: fixed;
+  width: 100%;
+  padding-bottom: 8px;
+  display:none;
+}
+/* ================================================================= */
+

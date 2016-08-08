@@ -1,0 +1,90 @@
+﻿@using System.Configuration
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>@ViewBag.Title - McIntire Visitor Administration</title>
+  <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+  <meta name="viewport" content="width=device-width" />
+  @Styles.Render("~/Content/themes/base/css", "~/Content/css")
+  @Scripts.Render("~/bundles/modernizr")
+  @RenderSection("styles", required: false)
+</head>
+<body>
+  <header>
+    <div id="TestSiteWarning">
+      <h3>This site is for testing and demostrating only. It is not a live site.</h3>
+    </div>
+    <div class="content-wrapper">
+      <div class="float-left">
+        <p class="site-title">@Html.ActionLink("Visitor Administration", "Index", "ClassVisitor")</p>
+        <div class="admin-actions-dropdown">
+          <a class="admin-actions">Administrator Actions</a>
+          <div class="admin-actions-submenu">
+            <ul class="admin-actions-submenu-root">
+              <li>@Html.ActionLink("Class Visitors", "Index", "ClassVisitor")</li>
+              <li>@Html.ActionLink("Ambassadors", "Index", "Ambassador")</li>
+              <li>@Html.ActionLink("Class Visit Time Slots", "Index", "TimeSlot")</li>
+              <li>@Html.ActionLink("McIntire Tours", "Index", "Tour")</li>
+              <li>@Html.ActionLink("Tourists", "Index", "Tourist")</li>
+              <li>@Html.ActionLink("Areas of Interest", "Index", "AcademicSubject")</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="float-right no-print">
+        <section id="login">
+          Current Login: <span class="username">@User.Identity.Name</span>
+        </section>
+      </div>
+    </div>
+  </header>
+  <div id="body">
+    @RenderSection("featured", required: false)
+    <section class="content-wrapper main-content clear-fix">
+      @RenderBody()
+    </section>
+  </div>
+
+  @Scripts.Render("~/bundles/visitors")
+  @RenderSection("scripts", required: false)
+
+  <script type="text/javascript">
+    $(function () {
+
+      // Administrator Actions Menu
+      $(".admin-actions").click(function () {
+        var x = $(this).attr('id');
+        if (x == 1) {
+          $(".admin-actions-submenu").hide();
+          $(this).attr('id', '0');
+        } else {
+          $(".admin-actions-submenu").show();
+          $(this).attr('id', '1');
+        }
+      });
+
+      $(".admin-actions-submenu").mouseup(function () {
+        return false;
+      });
+
+      $(".admin-actions").mouseup(function () {
+        return false;
+      });
+
+      //Document Click
+      $(document).mouseup(function () {
+        $(".admin-actions-submenu").hide();
+        $(".admin-actions").attr('id', '');
+      });
+
+      // Test Site Banner
+      var isDemoSite = @ConfigurationManager.AppSettings["IsDemoSite"];
+      if (isDemoSite) {
+        $('#TestSiteWarning').show();
+      }
+    });
+  </script>
+
+</body>
+</html>

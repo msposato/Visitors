@@ -1,0 +1,26 @@
+﻿@model IEnumerable<TourViewModel>
+
+@{
+  ViewBag.Title = "Tours";
+}
+
+<h3>McIntire Tours</h3>
+
+<p>
+  @Html.ActionLink("Create New", "Create", "Tour")
+</p>
+
+@Html.Partial("_Tours", Model)
+
+@section scripts
+{
+  <script>
+    $(function () {
+      $("#ToursTable").tablesorter(
+        {
+          sortList: [[0, 0]],
+          headers: { 5: { sorter: false } }
+        });
+    });
+  </script>
+}

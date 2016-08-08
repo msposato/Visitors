@@ -1,0 +1,28 @@
+﻿@model IEnumerable<ClassVisitorViewModel>
+
+<table>
+  <tr>
+    <th>Date</th>
+    <th>Visitor</th>
+    <th>@Html.DisplayNameFor(model => model.Phone)</th>
+    <th>Ambassador</th>
+    <th></th>
+  </tr>
+  @foreach (var item in Model)
+  {
+    <tr>
+      <td>@Html.DisplayFor(modelItem => item.PreferedTimeSlot.Description)</td>
+      <td><a href="mailto:@item.Email">@item.FullName</a></td>
+      <td>@Html.DisplayFor(modelItem => item.Phone)</td>
+      <td>
+        @if (item.Ambassador != null)
+        {
+          <a href="mailto:@item.Ambassador.Email">@item.Ambassador.FullName</a>
+        }
+      </td>
+      <td>
+        @Html.ActionLink("Edit", "Edit","ClassVisitor", new { id = item.Id }, null)
+      </td>
+    </tr>
+  }
+</table>

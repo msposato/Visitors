@@ -1,0 +1,66 @@
+﻿@model TourViewModel
+
+@{
+  ViewBag.Title = "Create";
+}
+
+<h3>Add a new McIntire tour</h3>
+
+@using (Html.BeginForm())
+{
+  @Html.AntiForgeryToken()
+  @Html.ValidationSummary(true)
+
+  <fieldset>
+    <legend>TourViewModel</legend>
+
+    <div class="editor-label">
+      @Html.LabelFor(model => model.StartTime)
+    </div>
+    <div class="editor-field">
+      @Html.EditorFor(model => model.StartTime)
+      @Html.ValidationMessageFor(model => model.StartTime)
+    </div>
+
+    <div class="editor-label">
+      @Html.LabelFor(model => model.Comments)
+    </div>
+    <div class="editor-field">
+      @Html.EditorFor(model => model.Comments)
+      @Html.ValidationMessageFor(model => model.Comments)
+    </div>
+
+    <div class="editor-label">
+      @Html.LabelFor(model => model.PrimaryAmbassador)
+    </div>
+    <div class="editor-field">
+      @Html.DropDownListFor(model => model.PrimaryAmbassadorId, Model.ActiveAmbassadors, "Select an Ambassador")
+      @Html.ValidationMessageFor(model => model.PrimaryAmbassadorId)
+    </div>
+
+    <div class="editor-label">
+      @Html.LabelFor(model => model.AssistantAmbassador)
+    </div>
+    <div class="editor-field">
+      @Html.DropDownListFor(model => model.AssistantAmbassadorId, Model.ActiveAmbassadors, "Select an Ambassador")
+      @Html.ValidationMessageFor(model => model.AssistantAmbassadorId)
+    </div>
+
+    <p>
+      <input type="submit" value="Create" />
+    </p>
+  </fieldset>
+}
+
+<div>
+  @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section scripts
+{
+  <script>
+    $(function () {
+      $('#StartTime').datetimepicker({ timeFormat: "hh:mm tt", hour: 13 });
+    });
+  </script>
+}

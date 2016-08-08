@@ -1,0 +1,44 @@
+﻿@model TouristViewModel
+
+<fieldset>
+  <legend>TouristViewModel</legend>
+
+  <div class="display-label">
+    @Html.DisplayFor(model => model.FullName)
+  </div>
+
+  <div class="display-field">
+    @Html.DisplayFor(model => model.Email)
+  </div>
+
+  <div class="display-field">
+    @Html.DisplayFor(model => model.Phone)
+  </div>
+
+  <div class="display-field">
+    @Html.DisplayFor(model => model.City) @Html.DisplayFor(model => model.State)
+  </div>
+
+  <div class="display-field">
+    <span class="display-label">Visit Date:</span> @Html.DisplayFor(model => model.Tour.StartTime)
+  </div>
+
+  <div class="display-field">
+    Number of visitors: @Html.DisplayFor(model => model.NumberInParty)
+  </div>
+
+  @if (Model.Tour.PrimaryAmbassador != null)
+  {
+    <div class="display-field">
+      Primary Ambassador: @Html.DisplayFor(model => model.Tour.PrimaryAmbassador.FullName)
+    </div>
+  }
+
+  @if (Model.Tour.AssistantAmbassador != null)
+  {
+    <div class="display-field">
+      Assistant Ambassador: @Html.DisplayFor(model => model.Tour.AssistantAmbassador.FullName)
+    </div>
+  }
+
+</fieldset>

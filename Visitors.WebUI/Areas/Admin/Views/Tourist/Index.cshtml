@@ -1,0 +1,45 @@
+﻿@model ListTouristsViewModel
+
+@{
+  ViewBag.Title = "Tourists";
+}
+
+<div>
+  @ViewBag.Message
+</div>
+
+<h3>McIntire Tourists</h3>
+Select Academic Year:
+@using (Html.BeginForm("ChangeYear", "Tourist", FormMethod.Post, new { style = "display:inline;" }))
+{
+  @Html.DropDownListFor(model => Model.Year, Model.Years, new { onchange = "this.form.submit();" })
+}
+<span class="display-field">(@Model.BeginDate.ToShortDateString() - @Model.EndDate.ToShortDateString())</span>
+
+<p>
+  @Html.ActionLink("Register for a McIntire Tour", "Create", "Tourist", new { area = "" }, null)
+</p>
+
+@if (Model.Tourists.Any())
+{
+  @Html.Partial("_Tourists", Model.Tourists)
+}
+else
+{
+  <p>No tourists for selected academic year.</p>
+}
+
+@section scripts
+{
+  <script>
+    $(function () {
+      $("#TouristsTable").tablesorter(
+        {
+          // initially sort by the first column
+          sortList: [[0, 0]],
+          headers: { 7: { sorter: false } }
+        }
+      );
+    });
+  </script>
+}

@@ -1,0 +1,82 @@
+﻿@model ListTimeSlotsViewModel
+
+@{
+  ViewBag.Title = "Index";
+}
+
+<h3>
+  Class Visit Time Slots
+  @using (Html.BeginForm("ChangeYear", "TimeSlot", FormMethod.Post, new { style = "display:inline;" }))
+  {
+    @Html.DropDownListFor(model => Model.Year, Model.Years, new { onchange = "this.form.submit();" })    
+    @Html.DropDownListFor(model => Model.Month, Model.Months, "All Months", new { onchange = "this.form.submit();" })    
+  }
+</h3>
+
+<p>
+  @Html.ActionLink("Create New", "Create")
+</p>
+@if (Model.TimeSlots.Any())
+{
+  <table id="TimeSlotsTable" class="sortable-table full-width highlight-rows">
+    <thead>
+      <tr>
+        <th>Starting</th>
+        <th>Ending</th>
+        <th>Description</th>
+        <th>Seats Available</th>
+        <th>Seats Remaining</th>
+        <th></th>
+      </tr>
+    </thead>
+
+    @foreach (var item in Model.TimeSlots)
+    {
+      <tr>
+        <td>@Html.DisplayFor(modelItem => item.StartDateTime)</td>
+        <td>@Html.DisplayFor(modelItem => item.EndDateTime)</td>
+        <td>@Html.DisplayFor(modelItem => item.Description)</td>
+        <td>@Html.DisplayFor(modelItem => item.SeatsAvailable)</td>
+        <td>@Html.DisplayFor(modelItem => item.SeatsRemaining)</td>
+        <td>
+          @Html.ActionLink("Edit", "Edit", new {id = item.Id}) |        
+          @Ajax.ActionLink("Visitors", "Visitors", new {id = item.Id}, new AjaxOptions
+            {
+              UpdateTargetId = "DetailsContentDialog",
+              HttpMethod = "GET",
+              InsertionMode = InsertionMode.Replace,
+              OnComplete = "ShowDetailsDialog();"
+            })
+          (@item.PrimaryVisitors.Count()) |
+          @Html.ActionLink("Delete", "Delete", new {id = item.Id})
+        </td>
+      </tr>
+    }
+
+  </table>
+}
+else
+{
+  <p>No class visit time slots for the selected time frame.</p>
+}
+
+<div id="DetailsContentDialog" class="dialog-content"></div>
+
+@section scripts
+{
+  <script>
+    $(function () {
+      $("#TimeSlotsTable").tablesorter(
+        {
+          // initially sort by the first column
+          sortList: [[0, 0]],
+          headers: { 5: { sorter: false } }
+        }
+      );
+    });
+
+    function ShowDetailsDialog() {
+      $("#DetailsContentDialog").dialog({ width: "auto" });
+    }
+  </script>
+}
